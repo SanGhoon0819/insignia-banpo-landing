@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sanghoon0819.github.io/insignia-banpo-landing/sitemap.xml
