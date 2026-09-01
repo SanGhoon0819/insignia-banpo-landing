@@ -1215,6 +1215,24 @@ section[id]{scroll-margin-top:88px}
 .gallery-grid>img,.gallery-grid>img:first-child,.gallery-grid>img:nth-child(n){width:100%!important;height:auto!important;aspect-ratio:4/3!important;object-fit:cover!important;grid-column:auto!important;grid-row:auto!important;display:block!important}
 @media(max-width:620px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}.gallery-grid>img,.gallery-grid>img:first-child,.gallery-grid>img:nth-child(n){width:100%!important;height:auto!important;aspect-ratio:4/3!important;grid-column:auto!important;grid-row:auto!important;display:block!important}}
 </style>
+<!-- Danggeun Market Code -->
+<script>
+  (function (w, d) {
+    if (w.karrotPixel) return;
+    var k = { stub: true, queue: [] };
+    k.init = function () { k.queue.push(['init', arguments, Date.now()]); };
+    k.track = function () { k.queue.push(['track', arguments, Date.now()]); };
+    w.karrotPixel = k;
+    var s = d.createElement('script');
+    s.async = true;
+    s.src = 'https://karrot-pixel.business.daangn.com/karrot-pixel.js';
+    var f = d.getElementsByTagName('script')[0];
+    f && f.parentNode ? f.parentNode.insertBefore(s, f) : d.head.appendChild(s);
+  })(window, document);
+  window.karrotPixel.init('1788248554693716001');
+  window.karrotPixel.track('ViewPage');
+</script>
+<!-- End Danggeun Market Code -->
 </head><body>
 <header><div class="wrap nav"><a class="logo" href="#top"><span class="logo-main">INSIGNIA</span><span class="logo-sub">BANPO</span></a><nav class="menu"><a href="#project">사업개요</a><a href="#location">입지환경</a><a href="#insight-value">프리미엄</a><a href="#unit">타입안내</a><a href="#gallery">갤러리</a><a href="#contact">문의하기</a></nav><div class="header-phone" data-phone="">1877-2027</div><a class="nav-cta form-link" href="#contact">관심고객등록</a></div></header>
 <section class="hero" id="top"><img alt="인시그니아 반포와 반포 일대" class="hero-bg" decoding="async" fetchpriority="high" loading="eager" src="assets/images/hero.webp"/><div class="wrap hero-content">
@@ -1350,6 +1368,7 @@ showGallery("84",false);
 let lightboxItems=[];
 let lightboxIndex=0;
 let lightboxGroup="";
+let lightboxHistoryActive=false;
 const lightbox=document.querySelector("#lightbox");
 const lightboxImg=lightbox.querySelector(".lightbox-image");
 const lightboxCaption=lightbox.querySelector(".lightbox-caption");
@@ -1369,6 +1388,10 @@ function openLightbox(el){
   lightbox.classList.add("open");
   lightbox.setAttribute("aria-hidden","false");
   document.body.style.overflow="hidden";
+  if(!lightboxHistoryActive){
+    history.pushState({lightbox:true}, "", location.href);
+    lightboxHistoryActive=true;
+  }
 }
 function renderLightbox(){
   if(!lightboxItems.length)return;
@@ -1380,11 +1403,25 @@ function renderLightbox(){
   lightbox.querySelector(".lightbox-prev").style.display=multi?"grid":"none";
   lightbox.querySelector(".lightbox-next").style.display=multi?"grid":"none";
 }
-function closeLightbox(){
+function hideLightbox(){
   lightbox.classList.remove("open");
   lightbox.setAttribute("aria-hidden","true");
   document.body.style.overflow="";
 }
+function closeLightbox(){
+  if(!lightbox.classList.contains("open"))return;
+  if(lightboxHistoryActive){
+    history.back();
+  }else{
+    hideLightbox();
+  }
+}
+window.addEventListener("popstate",()=>{
+  if(lightbox.classList.contains("open")){
+    lightboxHistoryActive=false;
+    hideLightbox();
+  }
+});
 function moveLightbox(step){
   if(!lightboxItems.length)return;
   lightboxIndex=(lightboxIndex+step+lightboxItems.length)%lightboxItems.length;
