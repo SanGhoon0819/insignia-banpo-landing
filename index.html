@@ -651,6 +651,22 @@ body{
 }
 
 @media(max-width:620px){
+  /* Mobile hero: show the full-width rendering instead of heavily cropping its sides. */
+  .hero{
+    min-height:680px;
+    background:#252525;
+  }
+  .hero-bg{
+    width:100%;
+    height:auto;
+    min-height:0;
+    inset:0 auto auto 0;
+    object-fit:contain;
+    object-position:center top;
+  }
+  .hero:after{
+    background:linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.30) 38%,rgba(0,0,0,.82) 78%,rgba(0,0,0,.96) 100%);
+  }
   header{height:50px}
   .nav{height:50px}
   .wrap{width:calc(100% - 24px)}
