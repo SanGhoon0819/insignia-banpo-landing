@@ -1302,7 +1302,7 @@ section[id]{scroll-margin-top:88px}
 <article class="unit-card"><button class="image-button zoomable" data-zoom-group="unit" type="button"><img src="assets/images/unit-84c.webp" loading="lazy" decoding="async" alt="인시그니아 반포 84C㎡ 평면도"></button><div class="unit-card-copy"><h3>84C㎡</h3><span>3Room / 2Bath</span></div></article>
 </div></div></section>
 <section class="view-section" id="visual-break"><div class="wrap view-copy"><div class="eyebrow">BANPO VIEW</div><h2>반포에서 만나는<br/>한강의 풍경</h2><p>도심과 한강이 함께 펼쳐지는 반포 생활권.</p></div><div class="view-image"><img alt="반포 한강 조망" decoding="async" loading="lazy" src="assets/images/hangang-view-02.webp"/></div></section>
-<section class="section" id="gallery"><div class="wrap fade"><div class="gallery-head"><div><div class="eyebrow">05 GALLERY</div><h2 class="title">인시그니아 반포<br/>실제 세대 갤러리.</h2><p class="lead">59㎡·84㎡ 실제 세대 내부와 외관, 커뮤니티 시설을 한곳에 모았습니다.</p></div><div class="gallery-tabs"><button class="active" data-gallery="84">84㎡ 실세대</button><button data-gallery="59">59㎡ 실세대</button><button data-gallery="커뮤니티">커뮤니티</button><button data-gallery="외관">외관</button></div></div><div class="gallery-grid" id="gallery-grid"></div><div class="gallery-more-wrap"><button class="gallery-more" id="gallery-more" type="button">사진 더보기</button></div><p class="gallery-note">※ 실제 관람 가능 호실은 판매 및 입주 상황에 따라 변경될 수 있습니다.</p></div></section>
+<section class="section" id="gallery"><div class="wrap fade"><div class="gallery-head"><div><div class="eyebrow">05 GALLERY</div><h2 class="title">인시그니아 반포<br/>실제 세대 갤러리.</h2><p class="lead">84A·84B·59㎡ 실제 촬영 사진과 외관, 커뮤니티 시설을 한곳에 모았습니다.</p></div><div class="gallery-tabs"><button class="active" data-gallery="84A">84A 실세대</button><button data-gallery="84B">84B 실세대</button><button data-gallery="59">59㎡ 실세대</button><button data-gallery="커뮤니티">커뮤니티</button><button data-gallery="외관">외관</button></div></div><div class="gallery-grid" id="gallery-grid"></div><div class="gallery-more-wrap"><button class="gallery-more" id="gallery-more" type="button">사진 더보기</button></div><p class="gallery-note">※ 실제 관람 가능 호실은 판매 및 입주 상황에 따라 변경될 수 있습니다.</p></div></section>
 <section class="contact-section" id="contact"><div class="wrap contact-modern fade"><div class="eyebrow">CONTACT</div><h2>분양 문의</h2><p>홍보관은 예약제로 운영됩니다.<br/>관심고객등록 해주시면 담당자가 빠르게 연락드리도록 하겠습니다.</p><div class="contact-phone-label">대표번호</div><a class="contact-phone" href="tel:18772027">1877-2027</a><div class="contact-buttons"><a class="form-link contact-primary" href="#">관심고객등록</a><a class="contact-secondary" href="tel:18772027">전화상담</a></div></div></section>
 <footer class="site-footer"><div class="wrap footer-grid"><div class="footer-brand"><strong>INSIGNIA</strong><span>BANPO</span></div><div class="footer-info"><b>인시그니아 반포</b><p>관리자 이상훈 · 대표번호 1877-2027<br/>realestateinfo@naver.com · 사평대로12</p><small>본 홈페이지의 이미지 및 내용은 소비자의 이해를 돕기 위한 것으로 실제 시공 및 분양 조건과 차이가 있을 수 있습니다.</small></div><div class="footer-contact"><b>CONTACT US</b><a href="tel:18772027">1877-2027</a><span>realestateinfo@naver.com</span></div></div></footer>
 <div class="mobile-bar"><a data-phone-link="" href="#">전화상담</a><a class="form-link" href="#">관심고객등록</a></div>
@@ -1381,19 +1381,20 @@ document.querySelector("#facts").innerHTML=SITE.facts.map(([a,b])=>`<div class="
 document.querySelector("#locations").innerHTML=SITE.locations.map(([a,b])=>`<div class="loc"><b>${a}</b><span>${b}</span></div>`).join("");
 
 const galleries={
- "84":["assets/images/gallery84-14-living.webp", "assets/images/gallery84-03-kitchen.webp", "assets/images/gallery84-04-room.webp", "assets/images/gallery84-01-living-kitchen.webp", "assets/images/gallery84-13-dressing.webp", "assets/images/gallery84-15-bathtub.webp", "assets/images/gallery84-02-living.webp", "assets/images/gallery84-08-kitchen.webp", "assets/images/gallery84-10-room.webp", "assets/images/gallery84-06-living.webp"],
- "59":["assets/images/gallery59-02-living-kitchen.webp", "assets/images/gallery59-01-room.webp", "assets/images/gallery59-04-dressing.webp", "assets/images/gallery59-03-living.webp", "assets/images/gallery-59-07.webp", "assets/images/gallery59-05-kitchen.webp", "assets/images/gallery-59-06.webp", "assets/images/gallery-59-08.webp", "assets/images/gallery-59-10.webp", "assets/images/gallery59-11-laundry.webp"],
+ "84A":["assets/images/real-202609/101-1202-04.jpg","assets/images/real-202609/101-1202-06.jpg","assets/images/real-202609/101-1202-03.jpg","assets/images/real-202609/101-1202-07.jpg","assets/images/real-202609/101-1202-10.jpg","assets/images/real-202609/101-1202-15.jpg","assets/images/real-202609/101-1202-11.jpg","assets/images/real-202609/101-1202-13.jpg","assets/images/real-202609/101-1202-01.jpg","assets/images/real-202609/101-1202-05.jpg"],
+ "84B":["assets/images/real-202609/102-1501-10.jpg","assets/images/real-202609/102-1501-21.jpg","assets/images/real-202609/102-1501-12.jpg","assets/images/real-202609/102-1501-18.jpg","assets/images/real-202609/102-1501-06.jpg","assets/images/real-202609/102-1501-13.jpg","assets/images/real-202609/102-1501-05.jpg","assets/images/real-202609/102-1501-16.jpg","assets/images/real-202609/102-1501-01.jpg","assets/images/real-202609/102-1501-23.jpg"],
+ "59":["assets/images/real-202609/102-1204-05.jpg","assets/images/real-202609/102-1204-09.jpg","assets/images/real-202609/102-1204-13.jpg","assets/images/real-202609/102-1204-07.jpg","assets/images/real-202609/102-1204-08.jpg","assets/images/real-202609/102-1204-03.jpg","assets/images/real-202609/102-1204-06.jpg","assets/images/real-202609/102-1204-04.jpg","assets/images/real-202609/102-1204-01.jpg","assets/images/real-202609/102-1204-15.jpg"],
  "커뮤니티":["assets/images/community-01-golf.webp", "assets/images/community-02-fitness.webp", "assets/images/community-03-multiroom.webp"],
  "외관":["assets/images/gallery-ext-01.webp", "assets/images/gallery-ext-02.webp", "assets/images/gallery-ext-03.webp", "assets/images/gallery-ext-04.webp", "assets/images/gallery-ext-05.webp", "assets/images/gallery-ext-06.webp", "assets/images/legacy-19.webp", "assets/images/legacy-04.webp", "assets/images/legacy-20.webp", "assets/images/legacy-21.webp", "assets/images/legacy-22.webp"]
 };
-let galleryCategory="84";
+let galleryCategory="84A";
 let galleryExpanded=false;
 const GALLERY_INITIAL_COUNT=6;
 
 /*
   갤러리 사진 추가 방법:
   아래 galleries 객체의 해당 배열에 이미지 한 줄만 추가하면 됩니다.
-  예) "84":[img1,img2,img3,새사진]
+  예) "84A":[img1,img2,img3,새사진]
 */
 function showGallery(k,expanded=false){
   galleryCategory=k;
@@ -1409,7 +1410,7 @@ function showGallery(k,expanded=false){
 }
 document.querySelectorAll("[data-gallery]").forEach(b=>b.addEventListener("click",()=>showGallery(b.dataset.gallery,false)));
 document.querySelector("#gallery-more").addEventListener("click",()=>showGallery(galleryCategory,true));
-showGallery("84",false);
+showGallery("84A",false);
 
 
 let lightboxItems=[];
@@ -1553,3 +1554,4 @@ document.querySelectorAll(".fade").forEach(el=>io.observe(el));
 })();
 </script>
 </body></html>
+
