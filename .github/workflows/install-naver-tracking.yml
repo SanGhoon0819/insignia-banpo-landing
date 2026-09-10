@@ -23,52 +23,52 @@ jobs:
           path = Path('index.html')
           text = path.read_text(encoding='utf-8')
 
-          common = '''
-<!-- NAVER Conversion Tracking -->
-<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
-<script type="text/javascript">
-if(!wcs_add) var wcs_add={};
-wcs_add["wa"] = "s_23a205432101";
-if(!_nasa) var _nasa={};
-if(window.wcs){
-  wcs.inflow();
-  wcs_do();
-}
-</script>
-<!-- END NAVER Conversion Tracking -->
-'''
+          common = """
+          <!-- NAVER Conversion Tracking -->
+          <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+          <script type="text/javascript">
+          if(!wcs_add) var wcs_add={};
+          wcs_add["wa"] = "s_23a205432101";
+          if(!_nasa) var _nasa={};
+          if(window.wcs){
+            wcs.inflow();
+            wcs_do();
+          }
+          </script>
+          <!-- END NAVER Conversion Tracking -->
+          """
 
-          events = '''
-<!-- NAVER conversion event tracking -->
-<script>
-(function () {
-  function naverConversion(type) {
-    if (!window.wcs || typeof window.wcs.trans !== 'function') return;
-    var conv = {};
-    conv.type = type;
-    window.wcs.trans(conv);
-  }
+          events = """
+          <!-- NAVER conversion event tracking -->
+          <script>
+          (function () {
+            function naverConversion(type) {
+              if (!window.wcs || typeof window.wcs.trans !== 'function') return;
+              var conv = {};
+              conv.type = type;
+              window.wcs.trans(conv);
+            }
 
-  document.addEventListener('click', function (e) {
-    var link = e.target.closest('a');
-    if (!link) return;
+            document.addEventListener('click', function (e) {
+              var link = e.target.closest('a');
+              if (!link) return;
 
-    var href = (link.getAttribute('href') || '').trim();
-    var isFormLink = link.classList.contains('form-link') || /naver\\.me|form\\.naver\\.com/i.test(href);
+              var href = (link.getAttribute('href') || '').trim();
+              var isFormLink = link.classList.contains('form-link') || /naver\\.me|form\\.naver\\.com/i.test(href);
 
-    if (isFormLink) {
-      naverConversion('custom001');
-      return;
-    }
+              if (isFormLink) {
+                naverConversion('custom001');
+                return;
+              }
 
-    if (/^tel:/i.test(href)) {
-      naverConversion('call');
-    }
-  }, true);
-})();
-</script>
-<!-- END NAVER conversion event tracking -->
-'''
+              if (/^tel:/i.test(href)) {
+                naverConversion('call');
+              }
+            }, true);
+          })();
+          </script>
+          <!-- END NAVER conversion event tracking -->
+          """
 
           changed = False
           if 's_23a205432101' not in text:
