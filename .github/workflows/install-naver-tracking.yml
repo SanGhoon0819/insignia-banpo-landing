@@ -1,0 +1,97 @@
+name: Install Naver conversion tracking
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-naver-tracking.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Insert Naver tracking into index.html
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          common = '''
+<!-- NAVER Conversion Tracking -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add={};
+wcs_add["wa"] = "s_23a205432101";
+if(!_nasa) var _nasa={};
+if(window.wcs){
+  wcs.inflow();
+  wcs_do();
+}
+</script>
+<!-- END NAVER Conversion Tracking -->
+'''
+
+          events = '''
+<!-- NAVER conversion event tracking -->
+<script>
+(function () {
+  function naverConversion(type) {
+    if (!window.wcs || typeof window.wcs.trans !== 'function') return;
+    var conv = {};
+    conv.type = type;
+    window.wcs.trans(conv);
+  }
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+
+    var href = (link.getAttribute('href') || '').trim();
+    var isFormLink = link.classList.contains('form-link') || /naver\\.me|form\\.naver\\.com/i.test(href);
+
+    if (isFormLink) {
+      naverConversion('custom001');
+      return;
+    }
+
+    if (/^tel:/i.test(href)) {
+      naverConversion('call');
+    }
+  }, true);
+})();
+</script>
+<!-- END NAVER conversion event tracking -->
+'''
+
+          changed = False
+          if 's_23a205432101' not in text:
+            text = text.replace('</head>', common + '\n</head>', 1)
+            changed = True
+
+          if 'NAVER conversion event tracking' not in text:
+            text = text.replace('</body>', events + '\n</body>', 1)
+            changed = True
+
+          if changed:
+            path.write_text(text, encoding='utf-8')
+          else:
+            print('Naver tracking already present; no change needed.')
+
+      - name: Commit tracking installation
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No index.html changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Install Naver conversion tracking"
+          git push
