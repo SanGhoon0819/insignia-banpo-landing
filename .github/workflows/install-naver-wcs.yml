@@ -19,7 +19,7 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           t = p.read_text(encoding='utf-8')
-          if 's_23a205432101' not in t:
+          if 'wcs.naver.net/wcslog.js' not in t:
               lines = ['<!-- NAVER Conversion Tracking -->','<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>','<script type="text/javascript">','if (!wcs_add) var wcs_add={};','wcs_add["wa"] = "s_23a205432101";','if (!_nasa) var _nasa={};','if(window.wcs){','wcs.inflow();','wcs_do();','}','</script>','<!-- END NAVER Conversion Tracking -->']
               code = '\n'.join(lines)
               t = t.replace('</head>', code + '\n</head>', 1)
