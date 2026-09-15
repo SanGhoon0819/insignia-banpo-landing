@@ -20,9 +20,19 @@ jobs:
           p = Path('index.html')
           t = p.read_text(encoding='utf-8')
           marker = '<html lang="ko"><head>'
-          if 'wcs.naver.net/wcslog.js' not in t:
-              lines = ['<!-- NAVER Conversion Tracking -->','<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>','<script type="text/javascript">','if (!wcs_add) var wcs_add={};','wcs_add["wa"] = "s_23a205432101";','if (!_nasa) var _nasa={};','if(window.wcs){','wcs.inflow();','wcs_do();','}','</script>','<!-- END NAVER Conversion Tracking -->']
-              code = '\n'.join(lines)
+          code = '''<!-- NAVER WCS COMMON SCRIPT -->
+          <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+          <script type="text/javascript">
+          if (!wcs_add) var wcs_add={};
+          wcs_add["wa"] = "s_23a205432101";
+          if (!_nasa) var _nasa={};
+          if(window.wcs){
+          wcs.inflow();
+          wcs_do();
+          }
+          </script>
+          <!-- END NAVER WCS COMMON SCRIPT -->'''
+          if '<!-- NAVER WCS COMMON SCRIPT -->' not in t:
               if marker not in t:
                   raise SystemExit('head marker not found')
               t = t.replace(marker, marker + '\n' + code, 1)
@@ -30,7 +40,8 @@ jobs:
           PY
       - name: Commit installation
         run: |
-          if git diff --quiet -- index.html; then exit 0; fi
+          git diff -- index.html
+          if git diff --quiet -- index.html; then echo "NO INDEX CHANGE"; exit 1; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
