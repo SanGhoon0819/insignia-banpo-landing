@@ -1,0 +1,54 @@
+name: Install Naver WCS common script
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-naver-wcs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Insert Naver WCS common script
+        shell: python
+        run: |
+          from pathlib import Path
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+          marker = 's_23a205432101'
+          if marker in text:
+              print('Naver WCS common script already present.')
+          else:
+              code = '''
+<!-- NAVER Conversion Tracking -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if (!wcs_add) var wcs_add={};
+wcs_add["wa"] = "s_23a205432101";
+if (!_nasa) var _nasa={};
+if(window.wcs){
+  wcs.inflow();
+  wcs_do();
+}
+</script>
+<!-- END NAVER Conversion Tracking -->
+'''
+              text = text.replace('</head>', code + '\n</head>', 1)
+              path.write_text(text, encoding='utf-8')
+
+      - name: Commit installation
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No index.html changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Install Naver WCS common tracking script"
+          git push
