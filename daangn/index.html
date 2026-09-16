@@ -5,34 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>인시그니아 반포</title>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LPCTFV9FSM"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-LPCTFV9FSM', {send_page_view:false});
-
-var redirected = false;
-function goHome(){
-  if (redirected) return;
-  redirected = true;
-  location.replace('https://insigniabanpo.kr/');
-}
-
-// Wait until gtag.js has had time to initialize, then send the dedicated
-// Daangn visit event. event_callback redirects after GA4 accepts the hit.
-setTimeout(function(){
-  gtag('event', 'daangn_visit', {
-    event_source: 'daangn_sosik',
-    page_location: 'https://insigniabanpo.kr/daangn/',
-    transport_type: 'beacon',
-    event_callback: goHome,
-    event_timeout: 2000
-  });
-}, 800);
-
-// Safety fallback so visitors are never left on this tracking page.
-setTimeout(goHome, 3200);
+// Daangn entry point: hand the visit to the main landing page with
+// standard GA4 campaign parameters so the whole session, including
+// reservation_click, keeps the acquisition source.
+location.replace('https://insigniabanpo.kr/?utm_source=daangn&utm_medium=paid_social&utm_campaign=daangn_sosik');
 </script>
 </head>
 <body></body>
