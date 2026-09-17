@@ -1293,18 +1293,6 @@ section[id]{scroll-margin-top:88px}
 </script>
 <!-- End Danggeun Market Code -->
 
-<!-- NAVER Conversion Tracking -->
-<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
-<script type="text/javascript">
-if(!wcs_add) var wcs_add={};
-wcs_add["wa"] = "s_23a205432101";
-if(!_nasa) var _nasa={};
-if(window.wcs){
-  wcs.inflow();
-  wcs_do();
-}
-</script>
-<!-- END NAVER Conversion Tracking -->
 
 </head><body>
 <header><div class="wrap nav"><a class="logo" href="#top"><span class="logo-main">INSIGNIA</span><span class="logo-sub">BANPO</span></a><nav class="menu"><a href="#project">사업개요</a><a href="#location">입지환경</a><a href="#insight-value">프리미엄</a><a href="#unit">타입안내</a><a href="#gallery">갤러리</a><a href="#contact">문의하기</a></nav><div class="header-phone" data-phone="">1877-2027</div><a class="nav-cta form-link" href="#contact">관심고객등록</a></div></header>
@@ -1575,6 +1563,14 @@ document.querySelectorAll(".fade").forEach(el=>io.observe(el));
         link_text: text,
         event_category: 'conversion'
       });
+      // Track the form-opening click, not a completed registration.
+      if (typeof window.fbq === 'function') {
+        window.fbq('trackCustom', 'reservation_click', {
+          content_name: '관심고객등록',
+          link_url: href,
+          link_text: text
+        });
+      }
     }
   }, true);
 })();
